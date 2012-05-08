@@ -22,10 +22,17 @@ class TestBarkeep < Test::Unit::TestCase
         <dt>Branch:</dt>
         <dd><a href="http://github.com/project_name/tree/new_branch">new_branch</a></dd>
         <dt>Commit:</dt>
-        <dd><a href="http://github.com/project_name/commit/abcdef" title="committed ">abcdef</a></dd>
+        <dd><a href="http://github.com/project_name/commit/abcdef" title="committed by">abcdef</a></dd>
         <dd class="close"><a href="#" onclick="c = document.getElementById('barkeep'); c.parentNode.removeChild(c); return false" title="Close me!">&times;</a></dd>
       </dl>
     )
     assert_equal expected.gsub(/\s+/, ''), render_barkeep.gsub(/\s+/, '')
+  end
+end
+
+# Stub out html_safe, we don't need to test that here.
+class String
+  def html_safe
+    self
   end
 end

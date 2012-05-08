@@ -13,30 +13,28 @@ module Barkeep
 
   def barkeep_styles
     return unless load_barkeep?
-    raw(%(<style>#{File.read(File.expand_path(File.dirname(__FILE__) + "/default.css"))}</style>))
+    %(<style>#{File.read(File.expand_path(File.dirname(__FILE__) + "/default.css"))}</style>).html_safe
   end
 
   def render_barkeep
     return unless load_barkeep? && grit_info.repository?
 
-    raw(
-      %(
-        <dl id="barkeep">
-        #{
-          barkeep_config['panes'].map do |name|
-            if name =~ /^(p|partial) (.*)/
-              render :partial => $2
-            else
-              send(name)
-            end
-          end.join('')
-        }
-        <dd class="close">
-          <a href="#" onclick="c = document.getElementById('barkeep'); c.parentNode.removeChild(c); return false" title="Close me!">&times;</a>
-        </dd>
-        </dl>
-      )
-    )
+    %(
+      <dl id="barkeep">
+      #{
+        barkeep_config['panes'].map do |name|
+          if name =~ /^(p|partial) (.*)/
+            render :partial => $2
+          else
+            send(name)
+          end
+        end.join('')
+      }
+      <dd class="close">
+        <a href="#" onclick="c = document.getElementById('barkeep'); c.parentNode.removeChild(c); return false" title="Close me!">&times;</a>
+      </dd>
+      </dl>
+    ).html_safe
   end
 
   def barkeep_config
