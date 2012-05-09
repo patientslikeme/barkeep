@@ -13,7 +13,7 @@ module Barkeep
 
   def barkeep_styles
     return unless load_barkeep?
-    %(<style>#{File.read(File.expand_path(File.dirname(__FILE__) + "/default.css"))}</style>)
+    %(<style>#{File.read(File.expand_path(File.dirname(__FILE__) + "/default.css"))}</style>).html_safe
   end
 
   def render_barkeep
@@ -34,7 +34,7 @@ module Barkeep
         <a href="#" onclick="c = document.getElementById('barkeep'); c.parentNode.removeChild(c); return false" title="Close me!">&times;</a>
       </dd>
       </dl>
-    )
+    ).html_safe
   end
 
   def barkeep_config

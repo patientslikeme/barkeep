@@ -29,3 +29,10 @@ class TestBarkeep < Test::Unit::TestCase
     assert_equal expected.gsub(/\s+/, ''), render_barkeep.gsub(/\s+/, '')
   end
 end
+
+# Stub out html_safe, we don't need to test that here.
+class String
+  def html_safe
+    self
+  end
+end
