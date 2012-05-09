@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{barkeep}
-  s.version = "0.1.0"
+  s.name = "barkeep"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["PatientsLikeMe"]
-  s.date = %q{2011-05-17}
-  s.description = %q{an extensible developer's status bar to track your current deployed commit & more}
-  s.email = %q{open_source@patientslikeme.com}
+  s.date = "2012-05-09"
+  s.description = "an extensible developer's status bar to track your current deployed commit & more"
+  s.email = "open_source@patientslikeme.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -21,11 +21,11 @@ Gem::Specification.new do |s|
     "lib/default.css",
     "lib/grit_wrapper.rb"
   ]
-  s.homepage = %q{https://github.com/patientslikeme/barkeep}
+  s.homepage = "https://github.com/patientslikeme/barkeep"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.1}
-  s.summary = %q{an extensible developer's status bar to track your current deployed commit & more}
+  s.rubygems_version = "1.8.19"
+  s.summary = "an extensible developer's status bar to track your current deployed commit & more"
   s.test_files = [
     "test/helper.rb",
     "test/test_barkeep.rb"
