@@ -34,6 +34,11 @@ http://i.imgur.com/0TTHX.png
 
 * Create a config file in config/barkeep.json (see example below)
 
+=== Rails 2
+
+If you are stuck in Rails 2, version 0.1.1 of Barkeep should work for you. Note that some of the installation options are
+different in Rails 2. Check the README in that version for more details.
+
 == Config
 
 Configuration is specified in a config/barkeep.json
