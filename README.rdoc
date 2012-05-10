@@ -10,7 +10,12 @@ http://i.imgur.com/0TTHX.png
 
 == Install
 
+=== Gem Installation
+
 * Install and require gem (add it to your Gemfile or your environment.rb file).
+
+=== Application Setup
+
 * in Rails, include Barkeep in your ApplicationHelper, i.e.
 
     module ApplicationHelper
@@ -22,7 +27,8 @@ http://i.imgur.com/0TTHX.png
 
     helpers Barkeep
 
-* add the barkeep styles in your layout header, i.e
+* add the barkeep styles in your layout header. This bypasses the assets pipeline. But that is OK,
+because you don't want this in your pipeline in production.
 
     <%= barkeep.styles %>
 
