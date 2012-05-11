@@ -26,7 +26,7 @@ class Barkeeper
 
   def styles
     return unless load?
-    %(<style>#{File.read(File.expand_path(File.dirname(__FILE__) + "/default.css"))}</style>)
+    %(<style>#{File.read(File.expand_path(File.dirname(__FILE__) + "/default.css"))}</style>).html_safe
   end
 
   def render
