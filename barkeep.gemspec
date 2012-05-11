@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "barkeep"
-  s.version = "0.2.1"
+  s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["PatientsLikeMe"]
-  s.date = "2012-05-10"
+  s.date = "2012-05-11"
   s.description = "an extensible developer's status bar to track your current deployed commit & more"
   s.email = "open_source@patientslikeme.com"
   s.extra_rdoc_files = [
