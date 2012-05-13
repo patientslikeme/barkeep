@@ -29,7 +29,7 @@ class TestBarkeep < Test::Unit::TestCase
         <dd class="close"><a href="#" onclick="c = document.getElementById('barkeep'); c.parentNode.removeChild(c); return false" title="Close me!">&times;</a></dd>
       </dl>
     )
-    assert_equal expected.gsub(/\s+/, ''), barkeep.render.gsub(/\s+/, '')
+    assert_equal expected.gsub(/\s+/, ''), barkeep.render_toolbar.gsub(/\s+/, '')
   end
 end
 
