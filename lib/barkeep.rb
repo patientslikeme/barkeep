@@ -29,7 +29,7 @@ class Barkeeper
     %(<style>#{File.read(File.expand_path(File.dirname(__FILE__) + "/default.css"))}</style>).html_safe
   end
 
-  def render
+  def render_toolbar
     return unless load? && grit_info.repository?
 
     %(
@@ -37,7 +37,7 @@ class Barkeeper
       #{
         config['panes'].map do |name|
           if name =~ /^(p|partial) (.*)/
-            render :partial => $2
+            renderer.send(:render_to_string, {:partial => $2})
           else
             send(name)
           end
@@ -48,6 +48,10 @@ class Barkeeper
       </dd>
       </dl>
     ).html_safe
+  end
+
+  def renderer
+    @@renderer ||= ApplicationController.new
   end
 
   def branch_info
