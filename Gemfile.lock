@@ -1,19 +1,23 @@
-GEM
-  remote: http://rubygems.org/
+PATH
+  remote: .
   specs:
-    diff-lcs (1.1.2)
-    git (1.2.5)
-    grit (2.0.0)
-      diff-lcs (>= 1.1.2)
-      mime-types (>= 1.15)
-    jeweler (1.5.2)
-      bundler (~> 1.0.0)
-      git (>= 1.2.5)
-      rake
-    json (1.4.6)
-    mime-types (1.16)
+    barkeep (0.2.3)
+      grit
+      json
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    diff-lcs (1.2.4)
+    grit (2.5.0)
+      diff-lcs (~> 1.1)
+      mime-types (~> 1.15)
+      posix-spawn (~> 0.3.6)
+    json (1.7.7)
+    mime-types (1.23)
     mocha (0.9.12)
-    rake (0.8.7)
+    posix-spawn (0.3.6)
+    rake (10.0.4)
     rcov (0.9.9)
     shoulda (2.11.3)
 
@@ -21,10 +25,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.0.0)
-  grit
-  jeweler (~> 1.5.2)
-  json
+  barkeep!
   mocha (>= 0.9.12)
+  rake
   rcov
   shoulda
