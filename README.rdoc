@@ -33,7 +33,7 @@ http://i.imgur.com/0TTHX.png
 
 * call barkeep.render from your layout or footer, i.e.
 
-    <%= barkeep.render %>
+    <%= barkeep.render_toolbar %>
 
 * These two methods will return an empty string unless the app is running under one of the environments specified in your config file
 
