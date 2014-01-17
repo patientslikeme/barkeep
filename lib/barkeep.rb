@@ -1,5 +1,5 @@
 require 'json'
-require 'grit_wrapper'
+require 'git_wrapper'
 
 module Barkeep
 
@@ -82,7 +82,7 @@ class Barkeeper
   end
 
   def grit_info
-    GritWrapper.instance
+    GitWrapper.instance
   end
 
   def branch_link_attributes

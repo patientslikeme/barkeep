@@ -19,7 +19,7 @@ class TestBarkeep < Test::Unit::TestCase
   end
 
   should "render the barkeep bar" do
-    GritWrapper.instance.stubs(:repository? => true, :to_hash => {:branch => 'new_branch', :commit => 'abcdef', :last_author => 'Johnny', :date => '2/11/2012'})
+    GitWrapper.instance.stubs(:repository? => true, :to_hash => {:branch => 'new_branch', :commit => 'abcdef', :last_author => 'Johnny', :date => '2/11/2012'})
     expected = %(
       <dl id="barkeep">
         <dt>Branch:</dt>

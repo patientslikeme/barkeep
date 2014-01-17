@@ -2,23 +2,14 @@ PATH
   remote: .
   specs:
     barkeep (0.2.3)
-      grit
       json
 
 GEM
   remote: https://rubygems.org/
   specs:
-    diff-lcs (1.2.4)
-    grit (2.5.0)
-      diff-lcs (~> 1.1)
-      mime-types (~> 1.15)
-      posix-spawn (~> 0.3.6)
-    json (1.7.7)
-    mime-types (1.23)
+    json (1.8.1)
     mocha (0.9.12)
-    posix-spawn (0.3.6)
     rake (10.0.4)
-    rcov (0.9.9)
     shoulda (2.11.3)
 
 PLATFORMS
@@ -28,5 +19,4 @@ DEPENDENCIES
   barkeep!
   mocha (>= 0.9.12)
   rake
-  rcov
   shoulda
