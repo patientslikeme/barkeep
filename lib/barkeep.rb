@@ -5,11 +5,14 @@ module Barkeep
 
   def barkeep
     @@barkeep ||= Barkeeper.new
+    @@barkeep.dup.tap { |barkeep| barkeep.renderer = self }
   end
 
 end
 
 class Barkeeper
+  
+  attr_accessor :renderer
 
   def config
     @config ||= JSON.parse(File.read("config/barkeep.json"))
@@ -37,7 +40,11 @@ class Barkeeper
       #{
         config['panes'].map do |name|
           if name =~ /^(p|partial) (.*)/
-            renderer.send(:render_to_string, {:partial => $2})
+            if renderer.respond_to?(:render_to_string)
+              renderer.send(:render_to_string, {:partial => $2})
+            else
+              renderer.send(:render, {:partial => $2})  
+            end
           else
             send(name)
           end
@@ -51,7 +58,7 @@ class Barkeeper
   end
 
   def renderer
-    @@renderer ||= ApplicationController.new
+    @renderer ||= ApplicationController.new
   end
 
   def branch_info
