@@ -37,9 +37,9 @@ class GitWrapper
       :branch => 'Not currently on a branch.',
       :commit => (File.read("REVISION").strip rescue nil)
     } unless repository?
-
+    
     @hash ||= {
-      :branch => `git rev-parse --abbrev-ref #{last_commit_hash}`.strip,
+      :branch => `git rev-parse --abbrev-ref HEAD`.strip,
       :commit => last_commit_hash,
       :last_author => last_commit.author,
       :message => last_commit.message,
