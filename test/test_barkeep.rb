@@ -15,7 +15,7 @@ class TestBarkeep < Test::Unit::TestCase
 
   should "render a style tag filled with css" do
     css = File.read(File.expand_path(File.dirname(__FILE__) + "/../lib/default.css"))
-    assert_equal "<style>#{css}</style>", barkeep.styles
+    assert_equal "<style>#{css}</style>", @barkeep.styles
   end
 
   should "render the barkeep bar" do
@@ -29,7 +29,7 @@ class TestBarkeep < Test::Unit::TestCase
         <dd class="close"><a href="#" onclick="c = document.getElementById('barkeep'); c.parentNode.removeChild(c); return false" title="Close me!">&times;</a></dd>
       </dl>
     )
-    assert_equal expected.gsub(/\s+/, ''), barkeep.render_toolbar.gsub(/\s+/, '')
+    assert_equal expected.gsub(/\s+/, ''), @barkeep.render_toolbar.gsub(/\s+/, '')
   end
 end
 
