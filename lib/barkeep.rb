@@ -70,6 +70,9 @@ class Barkeeper
   def commit_sha_info
     if grit_info.repository?
       %(<dt>Commit:</dt><dd><a href="#{commit_link_attributes[:href]}" title="#{commit_link_attributes[:title]}">#{(grit_info[:commit] || "").slice(0,8)}</a></dd>)
+    elsif File.exist?(Rails.root.join('REVISION'))
+      commit = Rails.root.join('REVISION').read.strip
+      %(<dt>Commit:</dt><dd><a href="#{commit_link(commit)}">#{commit.slice(0,8)}</a></dd>)
     end
   end
 
@@ -83,13 +86,6 @@ class Barkeeper
     if grit_info.repository?
       short_date = (grit_info[:date].respond_to?(:strftime) ? grit_info[:date].strftime("%d %B, %H:%M") : short_date.to_s)
       %(<dt>When:</dt><dd title="#{grit_info[:date].to_s}">#{short_date}</dd>)
-    end
-  end
-
-  def capistrano_commit_sha_info
-    if File.exist?(Rails.root.join('REVISION'))
-      commit = Rails.root.join('REVISION').read.strip
-      %(<dt>Commit:</dt><dd><a href="#{commit_link(commit)}">#{commit.slice(0,8)}</a></dd>)
     end
   end
 
