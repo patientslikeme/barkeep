@@ -87,8 +87,10 @@ class Barkeeper
   end
 
   def capistrano_commit_sha_info
-    commit = Rails.root.join('REVISION').read.strip
-    %(<dt>Commit:</dt><dd><a href="#{commit_link(commit)}">#{commit.slice(0,8)}</a></dd>)
+    if File.exist?(Rails.root.join('REVISION'))
+      commit = Rails.root.join('REVISION').read.strip
+      %(<dt>Commit:</dt><dd><a href="#{commit_link(commit)}">#{commit.slice(0,8)}</a></dd>)
+    end
   end
 
   def rpm_request_info
