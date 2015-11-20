@@ -45,7 +45,7 @@ helpers Barkeep
 
 * call barkeep.render from your layout or footer, i.e.
 
-```ruby
+```erb
 <%= barkeep.render_toolbar %>
 ```
 
