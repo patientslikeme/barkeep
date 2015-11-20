@@ -1,6 +1,6 @@
-= Barkeep
+## Barkeep
 
-{<img src="https://travis-ci.org/patientslikeme/barkeep.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/patientslikeme/barkeep]
+[![Build Status](https://travis-ci.org/patientslikeme/barkeep.svg?branch=master)](https://travis-ci.org/patientslikeme/barkeep)
 
 Barkeep is an extensible developer's status bar to track your current deployed
 commit and more.  Barkeep sits at the bottom of your app and shows information
@@ -8,62 +8,72 @@ you deem useful.
 
 Here's an example of Barkeep running with some default panes:
 
-http://i.imgur.com/0TTHX.png
+![Barkeep example](http://i.imgur.com/0TTHX.png)
 
-== Install
+## Install
 
-=== Gem Installation
+### Gem Installation
 
 * Install and require gem (add it to your Gemfile or your environment.rb file).
 
-=== Application Setup
+### Application Setup
 
 * in Rails, include Barkeep in your ApplicationHelper, i.e.
 
-    module ApplicationHelper
-      include Barkeep
-      ...
-    end
+```ruby
+module ApplicationHelper
+  include Barkeep
+  ...
+end
+```
 
 * in Sinatra, include Barkeep as a helper in your main app file, i.e.
 
-    helpers Barkeep
+```ruby
+helpers Barkeep
+```
 
 * add the barkeep styles in your layout header. This bypasses the assets pipeline. But that is OK, because you don't want this in your pipeline in production.
 
-    <%= barkeep.styles %>
+```erb
+<%= barkeep.styles %>
+```
 
 * call barkeep.render from your layout or footer, i.e.
 
-    <%= barkeep.render_toolbar %>
+```ruby
+<%= barkeep.render_toolbar %>
+```
 
 * These two methods will return an empty string unless the app is running under one of the environments specified in your config file
 
 * Create a config file in config/barkeep.json (see example below)
 
-=== Rails 2
+### Rails 2
 
 If you are stuck in Rails 2, version 0.1.1 of Barkeep should work for you. Note that some of the installation options are
 different in Rails 2. Check the README in that version for more details.
 
-== Config
+## Config
 
 Configuration is specified in a config/barkeep.json
 
 You want to specify some panes, a github url, and the environments in which you
 want to render Barkeep.  Here is a config with all the default panes:
 
-  {
-    "panes" : [
-      "branch_info",
-      "commit_sha_info",
-      "commit_author_info",
-      "commit_date_info",
-      "rpm_request_info"
-    ],
-    "github_url" : "https://github.com/USER_OR_ORGANIZATION/PROJECT_NAME",
-    "environments" : ["development", "stage"]
-  }
+```json
+{
+  "panes" : [
+    "branch_info",
+    "commit_sha_info",
+    "commit_author_info",
+    "commit_date_info",
+    "rpm_request_info"
+  ],
+  "github_url" : "https://github.com/USER_OR_ORGANIZATION/PROJECT_NAME",
+  "environments" : ["development", "stage"]
+}
+```
 
 Panes are rendered in the order specified in the array.  You can specify as
 many panes as you wish.
@@ -72,7 +82,7 @@ Panes are assumed to be methods accessible in the context of your
 ApplicationHelper.  Alternatively, you can specify a partial as a pane using
 the format "partial path/to/your/partial"
 
-== Custom Styling
+## Custom Styling
 
 Barkeep comes with some basic styling that has worked well for us.  You are
 encouraged to modify it to suit your needs.  The easiest way to do this is to
@@ -82,19 +92,19 @@ barkeep).  You can then pull it in to your main stylesheet or Sass-ify it, etc.
 Once you've setup your own styles, you probably won't want to call
 barkeep.styles anymore.
 
-== Included panes
+## Included panes
 
-* branch_info: shows the current branch and links to the branch on github
-* commit_sha_info: shows the current commit sha and links to the commit on
+* `branch_info`: shows the current branch and links to the branch on github
+* `commit_sha_info`: shows the current commit sha and links to the commit on
   github (useful when testing on stage for knowing what is depolyed)
-* commit_author_info: show the author of the current commit
-* commit_date_info: show the date of the current commit (hover for full
+* `commit_author_info`: show the author of the current commit
+* `commit_date_info`: show the date of the current commit (hover for full
   timestamp)
-* rpm_request_info: if you're using the newrelic gem in development mode, this
+* `rpm_request_info`: if you're using the newrelic gem in development mode, this
   provides a link to the development newerelic index and a link to the current
   request profiled in newrelic
 
-== Contributing to Barkeep
+## Contributing to Barkeep
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
@@ -104,8 +114,8 @@ barkeep.styles anymore.
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-== Copyright
+## Copyright
 
-Copyright (c) 2011 PatientsLikeMe. See LICENSE.txt for
+Copyright (c) 2011-2015 PatientsLikeMe. Distributed under the MIT license. See LICENSE.txt for
 further details.
 
