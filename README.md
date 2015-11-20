@@ -116,6 +116,6 @@ barkeep.styles anymore.
 
 ## Copyright
 
-Copyright (c) 2011-2015 PatientsLikeMe. Distributed under the MIT license. See LICENSE.txt for
+Copyright © 2011-2015 PatientsLikeMe. Distributed under the MIT license. See LICENSE.txt for
 further details.
 
