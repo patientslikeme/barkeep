@@ -1,5 +1,7 @@
 = Barkeep
 
+{<img src="https://travis-ci.org/patientslikeme/barkeep.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/patientslikeme/barkeep]
+
 Barkeep is an extensible developer's status bar to track your current deployed
 commit and more.  Barkeep sits at the bottom of your app and shows information
 you deem useful.
