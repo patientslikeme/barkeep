@@ -11,7 +11,7 @@ module Barkeep
 end
 
 class Barkeeper
-  
+
   attr_accessor :renderer
 
   def config
@@ -33,7 +33,7 @@ class Barkeeper
   end
 
   def render_toolbar
-    return unless load? && grit_info.repository?
+    return unless load?
 
     %(
       <dl id="barkeep">
@@ -43,7 +43,7 @@ class Barkeeper
             if renderer.respond_to?(:render_to_string)
               renderer.send(:render_to_string, {:partial => $2})
             else
-              renderer.send(:render, {:partial => $2})  
+              renderer.send(:render, {:partial => $2})
             end
           else
             send(name)
@@ -62,20 +62,31 @@ class Barkeeper
   end
 
   def branch_info
-    %(<dt>Branch:</dt><dd><a href="#{branch_link_attributes[:href]}">#{grit_info[:branch]}</a></dd>)
+    if grit_info.repository?
+      %(<dt>Branch:</dt><dd><a href="#{branch_link_attributes[:href]}">#{grit_info[:branch]}</a></dd>)
+    end
   end
 
   def commit_sha_info
-    %(<dt>Commit:</dt><dd><a href="#{commit_link_attributes[:href]}" title="#{commit_link_attributes[:title]}">#{(grit_info[:commit] || "").slice(0,8)}</a></dd>)
+    if grit_info.repository?
+      %(<dt>Commit:</dt><dd><a href="#{commit_link_attributes[:href]}" title="#{commit_link_attributes[:title]}">#{(grit_info[:commit] || "").slice(0,8)}</a></dd>)
+    elsif File.exist?(Rails.root.join('REVISION'))
+      commit = Rails.root.join('REVISION').read.strip
+      %(<dt>Commit:</dt><dd><a href="#{commit_link(commit)}">#{commit.slice(0,8)}</a></dd>)
+    end
   end
 
   def commit_author_info
-    %(<dt>Who:</dt><dd>#{grit_info[:last_author]}</dd>)
+    if grit_info.repository?
+      %(<dt>Who:</dt><dd>#{grit_info[:last_author]}</dd>)
+    end
   end
 
   def commit_date_info
-    short_date = (grit_info[:date].respond_to?(:strftime) ? grit_info[:date].strftime("%d %B, %H:%M") : short_date.to_s)
-    %(<dt>When:</dt><dd title="#{grit_info[:date].to_s}">#{short_date}</dd>)
+    if grit_info.repository?
+      short_date = (grit_info[:date].respond_to?(:strftime) ? grit_info[:date].strftime("%d %B, %H:%M") : short_date.to_s)
+      %(<dt>When:</dt><dd title="#{grit_info[:date].to_s}">#{short_date}</dd>)
+    end
   end
 
   def rpm_request_info
@@ -99,9 +110,13 @@ class Barkeeper
     }
   end
 
+  def commit_link(commit_hash)
+    "#{github_url}/commit/#{commit_hash}"
+  end
+
   def commit_link_attributes
     {
-      :href => "#{github_url}/commit/#{grit_info[:commit]}",
+      :href => commit_link(grit_info[:commit]),
       :title => "committed #{grit_info[:date]} by #{grit_info[:last_author]}"
     }
   end
