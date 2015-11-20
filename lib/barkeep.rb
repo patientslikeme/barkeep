@@ -3,9 +3,13 @@ require 'git_wrapper'
 
 module Barkeep
 
-  def barkeep
+  def self.barkeep
     @@barkeep ||= Barkeeper.new
     @@barkeep.dup.tap { |barkeep| barkeep.renderer = self }
+  end
+
+  def barkeep
+    ::Barkeep.barkeep
   end
 
 end

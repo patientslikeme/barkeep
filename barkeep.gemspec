@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'barkeep/version'
 
 Gem::Specification.new do |spec|
-  
+
   spec.name          = "barkeep"
   spec.version       = Barkeep::VERSION
   spec.authors       = ["PatientsLikeMe"]
@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency     "json"
-  spec.add_development_dependency "mocha", ">= 0.9.12"
-  spec.add_development_dependency "shoulda"
+  spec.add_development_dependency "mocha", ">= 1.1.0"
+  spec.add_development_dependency "minitest"
   spec.add_development_dependency "rake"
 end
