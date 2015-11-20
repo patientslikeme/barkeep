@@ -14,7 +14,7 @@ describe "Barkeep" do
 
   it "renders a style tag filled with css" do
     css = File.read(File.expand_path(File.dirname(__FILE__) + "/../lib/default.css"))
-    assert_equal "<style>#{css}</style>", barkeep.styles
+    barkeep.styles.must_equal "<style>#{css}</style>"
   end
 
   it "renders the barkeep bar" do
@@ -28,7 +28,7 @@ describe "Barkeep" do
         <dd class="close"><a href="#" onclick="c = document.getElementById('barkeep'); c.parentNode.removeChild(c); return false" title="Close me!">&times;</a></dd>
       </dl>
     )
-    assert_equal expected.gsub(/\s+/, ''), barkeep.render_toolbar.gsub(/\s+/, '')
+    expected.gsub(/\s+/, '').must_equal barkeep.render_toolbar.gsub(/\s+/, '')
   end
 end
 
