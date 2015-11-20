@@ -14,7 +14,11 @@ Here's an example of Barkeep running with some default panes:
 
 ### Gem Installation
 
-* Install and require gem (add it to your Gemfile or your environment.rb file).
+Add to your Gemfile:
+
+```ruby
+gem 'barkeep'
+```
 
 ### Application Setup
 
