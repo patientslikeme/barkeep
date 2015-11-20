@@ -18,7 +18,8 @@ describe "Barkeep" do
   end
 
   it "renders the barkeep bar" do
-    GitWrapper.instance.stubs(:repository? => true, :to_hash => {:branch => 'new_branch', :commit => 'abcdef', :last_author => 'Johnny', :date => '2/11/2012'})
+    barkeep.version_control_info = Barkeep::VersionControlInfo::Git.new
+    barkeep.version_control_info.stubs(:repository? => true, :branch => 'new_branch', :commit => 'abcdef', :author => 'Johnny', :date => '2/11/2012')
     expected = %(
       <dl id="barkeep">
         <dt>Branch:</dt>

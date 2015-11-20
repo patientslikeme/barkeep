@@ -1,5 +1,5 @@
 require 'json'
-require 'git_wrapper'
+require 'barkeep/version_control_info'
 
 module Barkeep
 
@@ -16,7 +16,7 @@ end
 
 class Barkeeper
 
-  attr_accessor :renderer
+  attr_accessor :renderer, :version_control_info
 
   def config
     @config ||= JSON.parse(File.read("config/barkeep.json"))
@@ -65,15 +65,19 @@ class Barkeeper
     @renderer ||= ApplicationController.new
   end
 
+  def version_control_info
+    @version_control_info ||= Barkeep::VersionControlInfo::Base.new
+  end
+
   def branch_info
-    if grit_info.repository?
-      %(<dt>Branch:</dt><dd><a href="#{branch_link_attributes[:href]}">#{grit_info[:branch]}</a></dd>)
+    if version_control_info.repository?
+      %(<dt>Branch:</dt><dd><a href="#{branch_link_attributes[:href]}">#{version_control_info.branch}</a></dd>)
     end
   end
 
   def commit_sha_info
-    if grit_info.repository?
-      %(<dt>Commit:</dt><dd><a href="#{commit_link_attributes[:href]}" title="#{commit_link_attributes[:title]}">#{(grit_info[:commit] || "").slice(0,8)}</a></dd>)
+    if version_control_info.repository?
+      %(<dt>Commit:</dt><dd><a href="#{commit_link_attributes[:href]}" title="#{commit_link_attributes[:title]}">#{(version_control_info.commit || "").slice(0,8)}</a></dd>)
     elsif File.exist?(Rails.root.join('REVISION'))
       commit = Rails.root.join('REVISION').read.strip
       %(<dt>Commit:</dt><dd><a href="#{commit_link(commit)}">#{commit.slice(0,8)}</a></dd>)
@@ -82,14 +86,14 @@ class Barkeeper
 
   def commit_author_info
     if grit_info.repository?
-      %(<dt>Who:</dt><dd>#{grit_info[:last_author]}</dd>)
+      %(<dt>Who:</dt><dd>#{version_control_info.author}</dd>)
     end
   end
 
   def commit_date_info
     if grit_info.repository?
-      short_date = (grit_info[:date].respond_to?(:strftime) ? grit_info[:date].strftime("%d %B, %H:%M") : short_date.to_s)
-      %(<dt>When:</dt><dd title="#{grit_info[:date].to_s}">#{short_date}</dd>)
+      short_date = (version_control_info.date.respond_to?(:strftime) ? version_control_info.date.strftime("%d %B, %H:%M") : short_date.to_s)
+      %(<dt>When:</dt><dd title="#{version_control_info.date.to_s}">#{short_date}</dd>)
     end
   end
 
@@ -103,14 +107,10 @@ class Barkeeper
     config['github_url']
   end
 
-  def grit_info
-    GitWrapper.instance
-  end
-
   def branch_link_attributes
     {
-      :href => "#{github_url}/tree/#{grit_info[:branch]}",
-      :title => grit_info[:message]
+      :href => "#{github_url}/tree/#{version_control_info.branch}",
+      :title => version_control_info.message
     }
   end
 
@@ -120,8 +120,8 @@ class Barkeeper
 
   def commit_link_attributes
     {
-      :href => commit_link(grit_info[:commit]),
-      :title => "committed #{grit_info[:date]} by #{grit_info[:last_author]}"
+      :href => commit_link(version_control_info.commit),
+      :title => "committed #{version_control_info.date} by #{version_control_info.author}"
     }
   end
 
