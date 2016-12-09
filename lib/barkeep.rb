@@ -8,7 +8,7 @@ module Barkeep
   end
 
   def barkeep
-    ::Barkeep.barkeep.dup.tap { |barkeep| barkeep.renderer = self }
+    ::Barkeep.barkeep.tap { |barkeep| barkeep.renderer = self }
   end
 
 end
