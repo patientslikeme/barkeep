@@ -30,6 +30,14 @@ describe "Barkeep" do
     )
     expected.gsub(/\s+/, '').must_equal barkeep.render_toolbar.gsub(/\s+/, '')
   end
+
+  it "sets renderer to class instance if class includes it" do
+    the_class = Class.new
+    the_class.include Barkeep
+    the_object = the_class.new
+
+    the_object.barkeep.renderer.must_equal the_object
+  end
 end
 
 # Stub out html_safe, we don't need to test that here.
