@@ -1,10 +1,14 @@
 require 'helper'
 
+class FakeModule
+  include Barkeep
+end
+
 describe "Barkeep" do
   attr_accessor :output_buffer
 
   let(:barkeep) do
-    Barkeep.barkeep.tap do |bk|
+    FakeModule.new.barkeep.tap do |bk|
       bk.stubs({
         :config => {'github_url' => 'http://github.com/project_name', 'panes' => ['branch_info', 'commit_sha_info'], 'environments' => ['development']},
         :load? => true
@@ -38,4 +42,3 @@ class String
     self
   end
 end
-
