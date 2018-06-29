@@ -1,3 +1,9 @@
+## Version 0.3.2 - June 29, 2018
+
+* Documentation updates
+* Test on more versions of Ruby
+* Use minitest for test suite
+
 ## Version 0.3.1 - November 20, 2015
 
 * Work in situations where you haven't deployed into a git repository
