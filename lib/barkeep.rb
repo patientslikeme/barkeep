@@ -71,7 +71,7 @@ class Barkeeper
 
   def branch_link
     return unless grit_info.repository?
-    %(<a href="#{branch_link_attributes[:href]}">#{grit_info[:branch]}</a>)
+    %(<a href="#{branch_link_attributes[:href]}">#{grit_info[:branch]}</a>).html_safe
   end
 
   def commit_sha_info
@@ -86,7 +86,7 @@ class Barkeeper
         hash: grit_info[:commit])
     end
     commit = Rails.root.join('REVISION').read.strip
-    compose_commit_sha_link(href: commit_link(commit), hash: commit)
+    compose_commit_sha_link(href: commit_link(commit), hash: commit).html_safe
   end
 
   def commit_author_info
