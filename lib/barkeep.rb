@@ -62,22 +62,35 @@ class Barkeeper
   end
 
   def renderer
-    @renderer ||= ApplicationController.new
+    if !@renderer || @renderer.is_a?(Barkeep.class)
+      @renderer = ApplicationController.new
+    end
+    @renderer
   end
 
   def branch_info
-    if grit_info.repository?
-      %(<dt>Branch:</dt><dd><a href="#{branch_link_attributes[:href]}">#{grit_info[:branch]}</a></dd>)
-    end
+    return unless grit_info.repository?
+    %(<dt>Branch:</dt><dd>#{branch_link}</dd>)
+  end
+
+  def branch_link
+    return unless grit_info.repository?
+    %(<a href="#{branch_link_attributes[:href]}">#{grit_info[:branch]}</a>)
   end
 
   def commit_sha_info
+    %(<dt>Commit:</dt><dd>#{commit_sha_link}</dd>)
+  end
+
+  def commit_sha_link
     if grit_info.repository?
-      %(<dt>Commit:</dt><dd><a href="#{commit_link_attributes[:href]}" title="#{commit_link_attributes[:title]}">#{(grit_info[:commit] || "").slice(0,8)}</a></dd>)
-    elsif File.exist?(Rails.root.join('REVISION'))
-      commit = Rails.root.join('REVISION').read.strip
-      %(<dt>Commit:</dt><dd><a href="#{commit_link(commit)}">#{commit.slice(0,8)}</a></dd>)
+      return compose_commit_sha_link(
+        href: commit_link_attributes[:href],
+        title: commit_link_attributes[:title],
+        hash: grit_info[:commit])
     end
+    commit = Rails.root.join('REVISION').read.strip
+    compose_commit_sha_link(href: commit_link(commit), hash: commit)
   end
 
   def commit_author_info
@@ -141,5 +154,11 @@ class Barkeeper
 
   def rpm_url
     "/newrelic/show_sample_detail/#{rpm_sample_id}"
+  end
+
+  private
+
+  def compose_commit_sha_link(href:, hash:, title:)
+    %(<a href="#{href}" title="#{title || 'link to this commit'}">#{hash.slice(0, 8)}</a>)
   end
 end
