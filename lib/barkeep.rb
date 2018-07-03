@@ -36,7 +36,7 @@ class Barkeeper
     return unless load?
 
     %(
-      <dl id="barkeep">
+      <dl id="barkeep" class="barkeep-#{branch_name}">
       #{
         config['panes'].map do |name|
           if name =~ /^(p|partial) (.*)/
@@ -59,6 +59,10 @@ class Barkeeper
 
   def renderer
     @renderer ||= ApplicationController.new
+  end
+
+  def branch_name
+    grit_info.repository? ? grit_info[:branch] : "production"
   end
 
   def branch_info

@@ -24,7 +24,7 @@ describe "Barkeep" do
   it "renders the barkeep bar" do
     GitWrapper.instance.stubs(:repository? => true, :to_hash => {:branch => 'new_branch', :commit => 'abcdef', :last_author => 'Johnny', :date => '2/11/2012'})
     expected = %(
-      <dl id="barkeep">
+      <dl id="barkeep" class="new_branch">
         <dt>Branch:</dt>
         <dd><a href="http://github.com/project_name/tree/new_branch">new_branch</a></dd>
         <dt>Commit:</dt>
